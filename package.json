@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://app.example.com",
+  "homepage": "https://tag.lukerichter.de",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
