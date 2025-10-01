@@ -3,5 +3,7 @@
     height: 600px;
     background-color: #111111;
     border-radius: 8px;
-    padding: 80px;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
 }

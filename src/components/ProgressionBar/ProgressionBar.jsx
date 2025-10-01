@@ -4,10 +4,22 @@ import './ProgressionBar.css'
 function ProgressionBar({ selectedState, changeState }) {
 
     const statesList = [
-        { icon: <CgSoftwareUpload /> },
-        { icon: <CgCalendarDates /> },
-        { icon: <CgEye /> },
-        { icon: <CgSoftwareDownload /> },
+        {
+            icon: <CgSoftwareUpload />,
+            state: "Upload"
+        },
+        {
+            icon: <CgCalendarDates />,
+            state: "Pick Date"
+        },
+        {
+            icon: <CgEye />,
+            state: "Review"
+        },
+        {
+            icon: <CgSoftwareDownload />,
+            state: "Pick Date"
+        }
     ]
 
     return (
@@ -21,6 +33,7 @@ function ProgressionBar({ selectedState, changeState }) {
                             className={`step ${index === selectedState ? 'selected' : ''}`}
                         >
                             {state.icon}
+                            <p>{state.state}</p>
                         </div>
                     )
                 )

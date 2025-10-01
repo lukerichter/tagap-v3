@@ -2,27 +2,41 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding-bottom: 40px;
 }
 
 .step {
-    font-size: 5em;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: #1a3046;
-    transition: color 0.2s, transform 0.2s;
-    transform-origin: center center;
-    will-change: transform, color;
     cursor: pointer;
 }
 
-.step:hover {
-    color: #2f5377;
-    transform: scale(1.08);
+.step svg {
+    font-size: 5em;
+    transition: color 0.25s, transform 0.2s;
+    transform-origin: center center;
 }
 
-
-
+.step p {
+    font-size: 1em;
+    transition: color 0.2s;
+    font-weight: bold;
+    margin: 0;
+}
 
 .step.selected {
     color: rgb(54, 144, 218);
+}
+
+.step:hover svg {
+    transform: scale(1.08);
+}
+
+.step:not(.selected):hover svg,
+.step:not(.selected):hover p {
+    color: #2f5377;
 }
