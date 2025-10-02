@@ -10,21 +10,21 @@ function UploadContent({ upload }) {
         const file = event.target.files[0];
         if (file) {
             upload(file)
+
         }
     };
 
     return (
         <>
-            <p>Upload the CSV File</p>
+            <p>Upload the CSV, XLS or XLSX File</p>
 
             <button
                 className='button file-selector'
                 onClick={() => fileInputRef.current.click()}
             >
                 <p>example.csv</p>
-                <div className="file-selector-icon-box">
-                    <CgSoftwareUpload />
-                </div>
+                <CgSoftwareUpload />
+
             </button>
 
             <input
