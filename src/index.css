@@ -1,22 +1,46 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #181818;
+    color: rgba(255, 255, 255, 0.87);
+    background: rgb(0, 0, 0);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    --inactive-color: #354958;
+    --active-color: #3690da;
+    --active-hover-color: #8dc9fa;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
 }
+
+.button {
+    all: unset;
+    appearance: none;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--active-color);
+    text-align: center;
+    font-weight: bold;
+    border-radius: 9999px;
+    transition: background 0.2s;
+}
+
+.button:disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.button:not(:disabled):hover {
+    background: var(--active-hover-color);
+}
+

@@ -5,7 +5,6 @@ import './UploadContent.css'
 function UploadContent({ upload }) {
 
     const fileInputRef = useRef(null);
-    const [warning, setWarning] = useState(0)
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -15,23 +14,25 @@ function UploadContent({ upload }) {
     };
 
     return (
-        <div className='content-box' >
+        <>
             <p>Upload the CSV File</p>
-            <div
-                className='file-selector'
+
+            <button
+                className='button file-selector'
                 onClick={() => fileInputRef.current.click()}
             >
                 <p>example.csv</p>
                 <div className="file-selector-icon-box">
                     <CgSoftwareUpload />
                 </div>
-            </div>
+            </button>
+
             <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
             />
-        </div>
+        </>
     )
 }
 

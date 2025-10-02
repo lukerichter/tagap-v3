@@ -1,0 +1,22 @@
+.navbox {
+    height: 40px;
+    position: relative;
+}
+
+.navbox button {
+    background: var(--active-color);
+    height: 100%;
+    width: 120px;
+}
+
+.navbox .navbox--next {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.navbox .navbox--prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

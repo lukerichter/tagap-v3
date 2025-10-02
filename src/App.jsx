@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg";
 import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
-
+import Navigation from './components/Navigation/Navigation.jsx';
 import './App.css'
 import useFile from './utils/logic.js'
 
@@ -9,25 +10,62 @@ import useFile from './utils/logic.js'
 function App() {
 
     const [stage, setStage] = useState(0)
+    const [disabledNext, setDisabledNext] = useState(false)
+
+
     const { uploadFile, resetFile } = useFile();
 
     const steps = [
-        <UploadContent upload={uploadFile} />,
-        //<DateContent />,
-        //<ReviewContent />,
-        //<DownloadContent />,
+        {
+            content: <UploadContent upload={uploadFile} />,
+            icon: <CgSoftwareUpload />,
+            name: "Upload"
+        },
+        {
+            // content: <DateContent />,
+            icon: <CgCalendarDates />,
+            name: "Date Picker"
+        },
+        {
+            // content: <DateContent />,
+            icon: <CgEye />,
+            name: "Review"
+        },
+        {
+            // content: <DateContent />,
+            icon: <CgSoftwareDownload />,
+            name: "Save"
+        }
     ]
 
+    const progressionList = steps.map(({ icon, name }) => ({ icon, name }))
+
     return (
-        <div className="container">
+        <>
+            <div className='container'>
 
-            <ProgressionBar selectedState={stage} changeState={setStage} />
+                <div className="app">
 
-            <div className='content'>
-                {steps[stage]}
+                    <ProgressionBar
+                        progressionList={progressionList}
+                        selectedState={stage}
+                        changeState={setStage}
+                    />
+
+                    <div className='app--content'>
+                        {steps[stage].content}
+                    </div>
+
+                    <Navigation
+                        stage={stage}
+                        setStage={setStage}
+                    />
+
+                </div>
+
             </div>
 
-        </div>
+        </>
     )
 }
 

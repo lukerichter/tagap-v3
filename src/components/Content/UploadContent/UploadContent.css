@@ -1,10 +1,9 @@
 .file-selector {
     width: 250px;
     height: 60px;
-    border-radius: 20px;
-    background-color: rgb(54, 144, 218);
+    background-color: var(--active-color);
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.2s;
     overflow: hidden;
     position: relative;
 }
@@ -19,26 +18,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(54, 144, 218);
+    background-color: var(--active-color);
 }
 
 .file-selector svg {
     font-size: 2em;
-    color: white;
 }
 
 .file-selector p {
     font-size: 1em;
     margin: 0;
-    color: white;
     padding: 0 20px;
     line-height: 60px;
     font-weight: bold;
-}
-
-.file-selector:hover {
-    transform: scale(1.05);
-}
+} 
 
 input {
     display: none;
