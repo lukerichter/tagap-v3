@@ -9,7 +9,6 @@ import './App.css'
 function App() {
 
     const [stage, setStage] = useState(0)
-    const [disabledNext, setDisabledNext] = useState(false)
 
     const steps = [
         {
