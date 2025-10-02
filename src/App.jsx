@@ -4,11 +4,14 @@ import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
 import Navigation from './components/Navigation/Navigation.jsx';
 import './App.css'
+import useFile from './utils/logic.js'
 
 
 function App() {
 
     const [stage, setStage] = useState(0)
+
+    const { uploadFile, resetFile } = useFile();
 
     const steps = [
         {
