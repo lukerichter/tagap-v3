@@ -1,0 +1,45 @@
+.file-selector {
+    width: 250px;
+    height: 60px;
+    border-radius: 20px;
+    background-color: rgb(54, 144, 218);
+    cursor: pointer;
+    transition: transform 0.2s;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-selector .file-selector-icon-box {
+    height: 100%;
+    aspect-ratio: 1;
+    width: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(54, 144, 218);
+}
+
+.file-selector svg {
+    font-size: 2em;
+    color: white;
+}
+
+.file-selector p {
+    font-size: 1em;
+    margin: 0;
+    color: white;
+    padding: 0 20px;
+    line-height: 60px;
+    font-weight: bold;
+}
+
+.file-selector:hover {
+    transform: scale(1.05);
+}
+
+input {
+    display: none;
+}
