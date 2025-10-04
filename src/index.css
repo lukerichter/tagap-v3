@@ -13,6 +13,9 @@
     --inactive-color: #354958;
     --active-color: #3690da;
     --active-hover-color: #8dc9fa;
+
+    --app-background: #111111;
+    --app-content-background: #0c0c0c;
 }
 
 body {
@@ -43,4 +46,3 @@ body {
 .button:not(:disabled):hover {
     background: var(--active-hover-color);
 }
-

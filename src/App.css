@@ -8,7 +8,7 @@
 .app {
     width: 1000px;
     height: 600px;
-    background-color: #111111;
+    background-color: var(--app-background);
     border-radius: 20px;
     padding: 40px;
     display: flex;
@@ -23,6 +23,6 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    background: #0c0c0c;
+    background: var(--app-content-background);
     border-radius: 20px;
 }

@@ -4,7 +4,7 @@ import './Navigation.css'
 
 
 
-function Navigation({ nextAllowed, nextFunction, prevFunction }) {
+function Navigation({ nextAllowed, prevAllowed, nextFunction, prevFunction}) {
 
     return (
         <div className="navbox">
@@ -12,6 +12,7 @@ function Navigation({ nextAllowed, nextFunction, prevFunction }) {
                 <button
                     className="button navbox--prev"
                     onClick={() => prevFunction()}
+                    disabled={!prevAllowed}
                 >
                     Previous
                 </button>

@@ -32,6 +32,7 @@ function UploadContent({ upload }) {
                 accept=".csv,.xls,.xlsx"
                 ref={fileInputRef}
                 onChange={handleFileChange}
+                style={{ display: "none" }}
             />
         </>
     )

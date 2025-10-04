@@ -1,0 +1,39 @@
+.date-inputs {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.date-inputs input {
+    all: unset;
+    appearance: none;
+
+    cursor: text;
+    border: 3px var(--active-color) solid;
+    padding: 10px;
+    border-radius: 9999px;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.date-inputs div {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.date-inputs .day input,
+.date-inputs .month input {
+    width: 80px;
+}
+
+.date-inputs .year input {
+    width: 120px;
+}

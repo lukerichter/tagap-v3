@@ -6,8 +6,8 @@ function checkFile(file) {
     return false
 }
 
-function checkDate(datee) {
-    if (date) {
+function checkDate(date) {
+    if (date && date instanceof Date && !isNaN(date.getTime())) {
         return true
     }
     return false

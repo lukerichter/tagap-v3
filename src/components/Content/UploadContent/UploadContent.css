@@ -1,34 +1,22 @@
 .file-selector {
-    width: 250px;
-    height: 60px;
-    background-color: var(--active-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
     cursor: pointer;
+    padding: 10px 20px;
     transition: all 0.2s;
-    overflow: hidden;
-    position: relative;
 }
 
 .file-selector svg {
-    height: 100%;
-    position: absolute;
-    right: 20px;
-    top: 0;
     font-size: 2em;
 }
 
 .file-selector p {
     font-size: 1em;
     margin: 0;
-    line-height: 60px;
     font-weight: bold;
-    position: absolute;
-    left: 20px;
-    top: 0;
     overflow: hidden;
     width: 160px;
     text-align: left;
-}
-
-input {
-    display: none;
 }
