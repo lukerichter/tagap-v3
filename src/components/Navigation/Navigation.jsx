@@ -1,21 +1,27 @@
 import './Navigation.css'
 
-function Navigation({ stage, setStage }) {
+
+
+
+
+function Navigation({ nextAllowed, nextFunction, prevFunction }) {
+
     return (
         <div className="navbox">
-            {stage > 0 && (
+            {prevFunction && (
                 <button
                     className="button navbox--prev"
-                    onClick={() => setStage(stage - 1)}
+                    onClick={() => prevFunction()}
                 >
                     Previous
                 </button>
             )}
 
-            {stage < 3 && (
+            {nextFunction && (
                 <button
                     className="button navbox--next"
-                    onClick={() => setStage(stage + 1)}
+                    onClick={() => nextFunction()}
+                    disabled={!nextAllowed}
                 >
                     Next
                 </button>

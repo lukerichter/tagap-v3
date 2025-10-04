@@ -29,6 +29,7 @@ function UploadContent({ upload }) {
 
             <input
                 type="file"
+                accept=".csv,.xls,.xlsx"
                 ref={fileInputRef}
                 onChange={handleFileChange}
             />

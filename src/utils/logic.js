@@ -1,23 +1,17 @@
-import { useState } from "react";
 
-
-function useFile() {
-    const [file, setFile] = useState(null)
-
-    function uploadFile(file) {
-        setFile(file)
+function checkFile(file) {
+    if (file && file.type === "text/csv") {
+        return true
     }
+    return false
+}
 
-    function resetFile() {
-        setFile(null)
+function checkDate(datee) {
+    if (date) {
+        return true
     }
-
-    return {
-        uploadFile,
-        resetFile
-    }
+    return false
 }
 
 
-
-export default useFile
+export { checkFile, checkDate }

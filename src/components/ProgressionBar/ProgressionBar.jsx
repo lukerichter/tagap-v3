@@ -1,19 +1,19 @@
 import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg";
 import './ProgressionBar.css'
 
-function ProgressionBar({ progressionList, selectedState, changeState }) {
+function ProgressionBar({ progressionList, selectedStage }) {
 
     return (
         <div className='progression'>
             {
                 progressionList.map(
-                    (state, index) => (
+                    (stage, index) => (
                         <div
                             key={index}
-                            className={`step ${index === selectedState ? 'selected' : ''}`}
+                            className={`step ${index === selectedStage ? 'selected' : ''}`}
                         >
-                            {state.icon}
-                            {state.name}
+                            {stage.icon}
+                            {stage.name}
                         </div>
                     )
                 )
