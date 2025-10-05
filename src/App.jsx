@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg";
 import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
@@ -6,6 +6,7 @@ import DateContent from './components/Content/DateContent/DateContent.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 import './App.css'
 import { checkFile, checkDate } from './utils/logic.js'
+import evaluation from './utils/evaluation.js'
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
         setStage(Math.max(0, stage - 1))
     }
 
+    function runEvalutation() {
+        evaluation(file, date)
+    }
+
 
     const stages = [
         {
@@ -33,14 +38,14 @@ function App() {
             prevFunction: null,
             nextFunction: nextStage,
             prevCondition: () => true,
-            nextCondition: () => true // checkFile(file)
+            nextCondition: () => checkFile(file)
         },
         {
             content: <DateContent preDate={date} changeDate={setDate} setLockDate={setLockDate} />,
             icon: <CgCalendarDates />,
             name: "Date Picker",
             prevFunction: prevStage,
-            nextFunction: nextStage,
+            nextFunction: runEvalutation,
             prevCondition: () => !lockDate,
             nextCondition: () => !lockDate && checkDate(date)
         },
@@ -65,10 +70,6 @@ function App() {
     ]
 
     const progressionList = stages.map(({ icon, name }) => ({ icon, name }))
-
-    useEffect(() => {
-        console.log("File changed:", file);
-    }, [file]);
 
     return (
         <>

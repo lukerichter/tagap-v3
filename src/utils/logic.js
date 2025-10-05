@@ -13,5 +13,4 @@ function checkDate(date) {
     return false
 }
 
-
-export { checkFile, checkDate }
+export { checkFile, checkDate}
