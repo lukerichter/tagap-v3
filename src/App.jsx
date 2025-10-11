@@ -3,18 +3,21 @@ import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "re
 import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
 import DateContent from './components/Content/DateContent/DateContent.jsx';
+import PreviewContent from './components/Content/PreviewContent/PreviewContent.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 import './App.css'
 import { checkFile, checkDate } from './utils/logic.js'
-import evaluation from './utils/evaluation.js'
+import { previewTable, readFile } from './utils/evaluation.js'
 
 
 function App() {
 
-    const [file, setFile] = useState(null)
-    const [lockDate, setLockDate] = useState(false)
+    const [data, setData] = useState(null)
     const [date, setDate] = useState(new Date())
-    const [stage, setStage] = useState(0)
+    const [stage, setStage] = useState(2)
+    const [errors, setErrors] = useState(null)
+
+    const [lockDate, setLockDate] = useState(false)
 
 
     function nextStage() {
@@ -25,38 +28,44 @@ function App() {
         setStage(Math.max(0, stage - 1))
     }
 
-    function runEvalutation() {
-        evaluation(file, date)
+
+    async function handleFileParse(file) {
+        try {
+            setData(await readFile(file))
+        } catch (err) {
+            setData(null)
+            console.error("Error:", err);
+        }
     }
 
 
     const stages = [
         {
-            content: <UploadContent upload={setFile} />,
+            content: <UploadContent upload={handleFileParse} />,
             icon: <CgSoftwareUpload />,
             name: "Upload",
             prevFunction: null,
-            nextFunction: nextStage,
+            nextFunction: () => { nextStage() },
             prevCondition: () => true,
-            nextCondition: () => checkFile(file)
+            nextCondition: () => data
         },
         {
             content: <DateContent preDate={date} changeDate={setDate} setLockDate={setLockDate} />,
             icon: <CgCalendarDates />,
             name: "Date Picker",
             prevFunction: prevStage,
-            nextFunction: runEvalutation,
+            nextFunction: () => { nextStage(), setErrors(previewTable(data)) },
             prevCondition: () => !lockDate,
             nextCondition: () => !lockDate && checkDate(date)
         },
         {
-            // content: <DateContent />,
+            content: <PreviewContent errors={errors}/>,
             icon: <CgEye />,
             name: "Review",
             prevFunction: prevStage,
             nextFunction: nextStage,
             prevCondition: () => true,
-            nextCondition: () => true
+            nextCondition: () => !errors
         },
         {
             // content: <DateContent />,

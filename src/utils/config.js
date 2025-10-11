@@ -1,34 +1,40 @@
 
-const dataMap = {
-    'name': 'Name',
-    'school': 'Schule',
-    'gender': 'Geschlecht',
-    'date': 'Geb. Datum',
-    'height': 'Größe',
-    'age': 'Alter',
-    'sum': 'Summe',
-}
-
-const newPerson = () => {
-    return {
-        name: '-',
-        school: '-',
-        gender: '-',
-        age: '-',
-        height: '-',
-
-        agility: { value: '-', points: 0 },
-        throwing: { value: '-', points: 0 },
-        jumping: { value: '-', points: 0 },
-        sprinting: { value: '-', points: 0 },
-        coordination: { value: '-', points: 0 },
-        stamina: { value: '-', points: 0 },
-
-        sum: 0,
+class TableError {
+    constructor(row, col, val) {
+        this.row = row
+        this.col = col
+        this.val = val
     }
 }
 
+const dataMap = {
+    name: 'Name',
+    school: 'Schule',
+    gender: 'Geschlecht',
+    date: 'Geb. Datum',
+    height: 'Größe',
+    age: 'Alter',
+    sum: 'Summe',
+}
 
+class Person {
+    constructor() {
+        this.name = '-'
+        this.school = '-'
+        this.gender = '-'
+        this.age = '-'
+        this.height = '-'
+
+        this.agility = { value: '-', points: 0 }
+        this.throwing = { value: '-', points: 0 }
+        this.jumping = { value: '-', points: 0 }
+        this.sprinting = { value: '-', points: 0 }
+        this.coordination = { value: '-', points: 0 }
+        this.stamina = { value: '-', points: 0 }
+
+        this.sum = 0
+    }
+}
 
 const disciplines = [
     {
@@ -63,6 +69,16 @@ const disciplines = [
     },
 ]
 
+const maleList = ['m', 'j', 'mann', 'männlich', 'junge']
+const femaleList = ['f', 'frau', 'w', 'weiblich', 'mädchen']
+const invalidList = ['-']
+
 export {
-    dataMap, disciplines, newPerson
+    dataMap,
+    disciplines,
+    Person,
+    maleList,
+    femaleList,
+    invalidList,
+    TableError
 }

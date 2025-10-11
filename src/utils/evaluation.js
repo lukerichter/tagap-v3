@@ -1,26 +1,76 @@
 import Papa from "papaparse"
-import { dataMap, disciplines, newPerson } from './config'
+import { dataMap, disciplines, Person, maleList, femaleList, TableError, invalidList } from './config'
 import lookup from "./table"
-
+import { checkDate } from "./logic"
 
 function previewTable(data) {
-    
+
+    const errors = []
+    const allDiscCols = disciplines.map((disc) => disc.cols).flat()
+
+    data.forEach((row, index) => {
+        const rowi = index + 2
+
+        // Check gender value
+        const allGenderStrings = maleList.concat(femaleList)
+        const genderValue = format(row[dataMap.gender])
+
+        if (!allGenderStrings.includes(genderValue)) {
+            errors.push(
+                new TableError(rowi, dataMap.gender, genderValue)
+            )
+        }
+
+        // Check birthday value
+        const dateValue = row[dataMap.date]
+        if (!checkDate(new Date(dateValue))) {
+            errors.push(
+                new TableError(rowi, dataMap.date, dateValue)
+            )
+        }
+
+        // Check discipline values
+        allDiscCols.forEach((disc) => {
+            const numberValue = format(row[disc])
+            if (!isValidNumber(numberValue) && !invalidList.includes(numberValue)) {
+                errors.push(
+                    new TableError(rowi, disc, numberValue)
+                )
+            }
+        })
+    })
+
+    return errors
+
 }
 
+function isValidNumber(value) {
+    if (typeof value === 'number') {
+        return Number.isFinite(value);
+    }
 
+    if (typeof value === 'string' && value.trim() !== '') {
+        const num = Number(value);
+        return Number.isFinite(num);
+    }
 
-function evaluation(file, date) {
+    return false
+}
 
-    date = new Date() // TODO: remove this!
+function runEvaluation() {
+    evalAll()
+}
 
-    Papa.parse(file, {
-        header: true,
-        complete: function (results) {
-            evalAll(results.data, date)
-        },
-        error: (err) => {
-            console.error("Error parsing CSV:", err)
-        }
+function readFile(file) {
+
+    return new Promise((resolve, reject) => {
+        Papa.parse(file, {
+            header: true,
+            complete: (results) => {
+                resolve(results.data)
+            },
+            error: (err) => reject(err),
+        })
     })
 }
 
@@ -38,14 +88,17 @@ function evalAll(data, date) {
 
 function evalPerson(data, date) {
 
-    const person = newPerson()
+    const person = new Person()
     person.name = data[dataMap.name]
     person.height = data[dataMap.height]
     person.school = data[dataMap.school]
     person.age = getAge(data, date)
     person.gender = getGender(data)
 
-    const table = lookup[person.gender][person.age > 10 ? 10 : person.age]
+    // there are only tables for an age between 7 and 10. 
+    // Therefor the age is restricted to this as followed
+    const tableAge = person.age > 10 ? 10 : (person.age < 7 ? 7 : person.age)
+    const table = lookup[person.gender][tableAge]
 
     disciplines.forEach(discipline => {
         const { score, val } = evalDiscipline(discipline, data, table[discipline.name])
@@ -56,7 +109,6 @@ function evalPerson(data, date) {
 
     return person
 }
-
 
 function evalDiscipline(discipline, data, col) {
 
@@ -117,19 +169,17 @@ function getGender(data) {
 
     const val = data[dataMap.gender].toLowerCase().trim()
 
-    if (['m', 'j', 'mann', 'männlich', 'junge'].includes(val)) {
+    if (maleList.includes(val)) {
         return 'm'
     }
 
-    if (['f', 'frau', 'w', 'weiblich', 'mädchen'].includes(val)) {
+    if (femaleList.includes(val)) {
         return 'w'
     }
-
-    return null
 }
 
 function format(val) {
-    return val.toLowerCase().trim().replace(',', '.')
+    return val.toLowerCase().replace(' ', '').replace(',', '.')
 }
 
-export default evaluation
+export { previewTable, readFile }
