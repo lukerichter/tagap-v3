@@ -52,3 +52,7 @@
 .error-header div {
     flex: 1;
 }
+
+.noerror-p {
+    font-weight: bold;
+}

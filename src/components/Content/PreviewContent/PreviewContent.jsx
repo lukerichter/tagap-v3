@@ -23,10 +23,7 @@ function ErrorHeader() {
     )
 }
 
-
-
-
-function PreviewContent({ errors }) {
+function ErrorList({ errors }) {
     return (
         <>
             <div className="header">
@@ -35,7 +32,7 @@ function PreviewContent({ errors }) {
             </div>
 
             <div className="error-box">
-                
+
                 {errors && <ErrorHeader />}
 
                 <div className="scroll-box">
@@ -51,6 +48,19 @@ function PreviewContent({ errors }) {
                 </div>
 
             </div>
+        </>
+    )
+}
+
+
+function PreviewContent({ errors }) {
+    return (
+        <>
+            {errors.length > 0 ? (
+                <ErrorList errors={errors} />
+            ) : (
+                <p className="noerror-p">No Errors found :)</p>
+            )}
         </>
     )
 }
