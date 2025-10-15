@@ -1,24 +1,26 @@
 import { useState } from 'react'
 import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg";
+
 import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
 import DateContent from './components/Content/DateContent/DateContent.jsx';
 import PreviewContent from './components/Content/PreviewContent/PreviewContent.jsx';
+import SaveContent from './components/Content/SaveContent/SaveContent.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
+
 import './App.css'
-import { checkFile, checkDate } from './utils/logic.js'
-import { previewTable, readFile } from './utils/evaluation.js'
+
+import { checkDate } from './utils/logic.js'
+import { previewTable, readFile, runEvaluation } from './utils/evaluation.js'
 
 
 function App() {
 
     const [data, setData] = useState(null)
     const [date, setDate] = useState(new Date())
-    const [stage, setStage] = useState(2)
-    const [errors, setErrors] = useState(null)
-
+    const [stage, setStage] = useState(0)
+    const [errors, setErrors] = useState([])
     const [lockDate, setLockDate] = useState(false)
-
 
     function nextStage() {
         setStage(Math.min(stages.length - 1, stage + 1))
@@ -27,7 +29,6 @@ function App() {
     function prevStage() {
         setStage(Math.max(0, stage - 1))
     }
-
 
     async function handleFileParse(file) {
         try {
@@ -38,18 +39,17 @@ function App() {
         }
     }
 
-
     const stages = [
-        {
+        { // File selector
             content: <UploadContent upload={handleFileParse} />,
             icon: <CgSoftwareUpload />,
             name: "Upload",
             prevFunction: null,
-            nextFunction: () => { nextStage() },
+            nextFunction: nextStage,
             prevCondition: () => true,
             nextCondition: () => data
         },
-        {
+        { // Date picker
             content: <DateContent preDate={date} changeDate={setDate} setLockDate={setLockDate} />,
             icon: <CgCalendarDates />,
             name: "Date Picker",
@@ -58,17 +58,17 @@ function App() {
             prevCondition: () => !lockDate,
             nextCondition: () => !lockDate && checkDate(date)
         },
-        {
-            content: <PreviewContent errors={errors}/>,
+        { // Table Checker / Preview
+            content: <PreviewContent errors={errors} />,
             icon: <CgEye />,
             name: "Review",
             prevFunction: prevStage,
-            nextFunction: nextStage,
+            nextFunction: () => { nextStage(), runEvaluation(data, date) },
             prevCondition: () => true,
-            nextCondition: () => !errors
+            nextCondition: () => errors.length === 0
         },
-        {
-            // content: <DateContent />,
+        { // Evaluation and save file
+            content: <SaveContent />,
             icon: <CgSoftwareDownload />,
             name: "Save",
             prevFunction: prevStage,

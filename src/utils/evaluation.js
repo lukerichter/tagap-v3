@@ -57,10 +57,6 @@ function isValidNumber(value) {
     return false
 }
 
-function runEvaluation() {
-    evalAll()
-}
-
 function readFile(file) {
 
     return new Promise((resolve, reject) => {
@@ -75,7 +71,7 @@ function readFile(file) {
 }
 
 
-function evalAll(data, date) {
+function runEvaluation(data, date) {
 
     const evalList = []
     data.forEach(pers => {
@@ -182,4 +178,4 @@ function format(val) {
     return val.toLowerCase().replace(' ', '').replace(',', '.')
 }
 
-export { previewTable, readFile }
+export { previewTable, readFile, runEvaluation }
