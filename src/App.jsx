@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg";
+import { CgSoftwareUpload, CgCalendarDates, CgEye, CgSoftwareDownload } from "react-icons/cg"
 
 import ProgressionBar from './components/ProgressionBar/ProgressionBar'
 import UploadContent from './components/Content/UploadContent/UploadContent'
-import DateContent from './components/Content/DateContent/DateContent.jsx';
-import PreviewContent from './components/Content/PreviewContent/PreviewContent.jsx';
-import SaveContent from './components/Content/SaveContent/SaveContent.jsx';
-import Navigation from './components/Navigation/Navigation.jsx';
+import DateContent from './components/Content/DateContent/DateContent.jsx'
+import PreviewContent from './components/Content/PreviewContent/PreviewContent.jsx'
+import SaveContent from './components/Content/SaveContent/SaveContent.jsx'
+import Navigation from './components/Navigation/Navigation.jsx'
 
 import './App.css'
 
@@ -35,7 +35,7 @@ function App() {
             setData(await readFile(file))
         } catch (err) {
             setData(null)
-            console.error("Error:", err);
+            console.error("Error:", err)
         }
     }
 

@@ -46,12 +46,12 @@ function previewTable(data) {
 
 function isValidNumber(value) {
     if (typeof value === 'number') {
-        return Number.isFinite(value);
+        return Number.isFinite(value)
     }
 
     if (typeof value === 'string' && value.trim() !== '') {
-        const num = Number(value);
-        return Number.isFinite(num);
+        const num = Number(value)
+        return Number.isFinite(num)
     }
 
     return false
@@ -78,7 +78,7 @@ function runEvaluation(data, date) {
         evalList.push(evalPerson(pers, date))
     })
 
-    console.log(evalList);
+    console.log(evalList)
 
 }
 
@@ -134,15 +134,14 @@ function getDisiplineValue(discipline, data) {
         if (val === '-') {
             return
         }
+
+        if (best == undefined) {
+            best = val
+        }
+
         if (discipline.moreIsBetter) {
-            if (best == undefined) {
-                best = val
-            }
             best = (val >= best) ? val : best
         } else {
-            if (best == undefined) {
-                best = val
-            }
             best = (val <= best) ? val : best
         }
     })

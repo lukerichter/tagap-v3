@@ -7,16 +7,6 @@ class TableError {
     }
 }
 
-const dataMap = {
-    name: 'Name',
-    school: 'Schule',
-    gender: 'Geschlecht',
-    date: 'Geb. Datum',
-    height: 'Größe',
-    age: 'Alter',
-    sum: 'Summe',
-}
-
 class Person {
     constructor() {
         this.name = '-'
@@ -34,6 +24,16 @@ class Person {
 
         this.sum = 0
     }
+}
+
+const dataMap = {
+    name: 'Name',
+    school: 'Schule',
+    gender: 'Geschlecht',
+    date: 'Geb. Datum',
+    height: 'Größe',
+    age: 'Alter',
+    sum: 'Summe',
 }
 
 const disciplines = [
